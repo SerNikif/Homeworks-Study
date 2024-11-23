@@ -14,12 +14,12 @@ class User(BaseModel):
 
 
 @app.get('/users', response_model=List[User])
-async def get_users() -> List[User]:
+async def Get_Users() -> List[User]:
     return users
 
 
 @app.post('/user/{username}/{age}', response_model=User)
-async def add_user(
+async def Post_User(
         username: Annotated[str, Path(description="Имя пользователя")],
         age: Annotated[int, Path(description="Возраст пользователя")]) -> User:
     new_id = users[-1].id + 1 if users else 1
@@ -29,7 +29,7 @@ async def add_user(
 
 
 @app.put('/user/{user_id}/{username}/{age}', response_model=User)
-async def update_user(user_id: Annotated[int, Path(description="ID User")],
+async def Update_User(user_id: Annotated[int, Path(description="ID User")],
                       username: Annotated[str, Path(description="Username")],
                       age: Annotated[int, Path(description="Age User")]) -> User:
     try:
@@ -42,7 +42,7 @@ async def update_user(user_id: Annotated[int, Path(description="ID User")],
 
 
 @app.delete('/user/{user_id}', response_model=User)
-async def delete_user(user_id: Annotated[int, Path(description="ID User")]) -> User:
+async def Delete_User(user_id: Annotated[int, Path(description="ID User")]) -> User:
     try:
         user = next(user for user in users if user.id == user_id)
         users.remove(user)
