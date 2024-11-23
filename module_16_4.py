@@ -20,8 +20,8 @@ async def Get_Users() -> List[User]:
 
 @app.post('/user/{username}/{age}', response_model=User)
 async def Post_User(
-        username: Annotated[str, Path(description="Имя пользователя")],
-        age: Annotated[int, Path(description="Возраст пользователя")]) -> User:
+        username: Annotated[str, Path(description="Username")],
+        age: Annotated[int, Path(description="Age User")]) -> User:
     new_id = users[-1].id + 1 if users else 1
     new_user = User(id=new_id, username=username, age=age)
     users.append(new_user)
